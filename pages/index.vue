@@ -1,24 +1,24 @@
 <template lang="pug">
   section.section
-
-  </section>
+    b-carousel
+      b-carousel-item(v-for="(carousel, i) in carousels" :key="i")
+        section(:class="`hero is-medium is-${carousel.color}`")
+          .hero-body.has-text-centered
+            h1.title {{carousel.text}}
 </template>
 
 <script>
-import BLogo from '@/components/Logo'
-
 export default {
-  name: 'HomePage',
-  components: {BLogo},
-  data() {
-      return {
-          features: [
-              { icon: 'github-circle', title: 'Free', content: `<span>Open source on <a href="https://github.com/buefy/buefy"> GitHub</a></span>` },
-              { icon: 'cellphone-link', title: 'Responsive', content: `<span><b class="has-text-grey">Every</b> component is responsive</span>` },
-              { icon: 'alert-decagram', title: 'Modern', content: `<span>Built with <a href="https://vuejs.org/">Vue.js</a> and <a href="http://bulma.io/">Bulma</a></span>` },
-              { icon: 'arrange-bring-to-front', title: 'Lightweight', content: `<span>No other internal dependency</span>` }
-          ]
-      }
-  }
+    data(){
+        return {
+            carousels: [
+                { text: 'Slide 1', color: 'primary' },
+                { text: 'Slide 2', color: 'info' },
+                { text: 'Slide 3', color: 'success' },
+                { text: 'Slide 4', color: 'warning' },
+                { text: 'Slide 5', color: 'danger' }
+            ]
+        }
+    }
 }
 </script>
