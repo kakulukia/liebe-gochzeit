@@ -10,7 +10,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'Hochzeitsgeschenk',
     htmlAttrs: {
       lang: "de",
     },
@@ -20,7 +20,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '//static-3.versacommerce.de/winter-leaf-19_versacommerce_de/designs/myshopify-themes-drexel-11-ver1-0-7/assets/favicon.png?4732' }
     ]
   },
 
@@ -65,8 +65,12 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    publicPath: 'https://liebendgern.de/hochzeitsgeschenk/',
     extend(config, ctx) {
 
     }
+  },
+  router: {
+    base: '/hochzeitsgeschenk/'
   }
 }

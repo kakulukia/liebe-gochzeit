@@ -66,30 +66,32 @@ main.section
   background: white
 
 .text1, .text2
-  margin-top: 1em
   hyphens: auto
   line-height: 18px
   white-space: break-spaces
 
 .text2
   font-weight: 300
+  margin-top: 1em
 
 .price
-  margin-top: 1em
+  margin-top: 16px
   font-size: 30px
   font-weight: 700
-.texte.has-text-centered
-  position: relative
-  .swiper
-    position: absolute
-    right:0
-    top: 1em
-    float: none
-  .text1
-    margin-top: 0
-    font-weight: 500
-  .text2
-    font-weight: 500
+
+.texte
+  padding-top: 16px
+  &.has-text-centered
+    position: relative
+    .swiper
+      position: absolute
+      right:0
+      top: 16px
+      float: none
+    .text1
+      font-weight: 500
+    .text2
+      font-weight: 500
 
 .order
   background: #EC744E
@@ -120,7 +122,7 @@ export default {
   },
   data(){
     return {
-      carousel: 5,
+      carousel: 0,
       slides: [
         {
           image: 'liebendgern-hochzeit-philipp.png',
