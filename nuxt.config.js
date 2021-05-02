@@ -2,15 +2,21 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
+  server: {
+    host: '0.0.0.0'
+  },
 
   /*
   ** Headers of the page
   */
   head: {
     title: pkg.name,
+    htmlAttrs: {
+      lang: "de",
+    },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
@@ -33,7 +39,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '@/plugins/vue-awesome-swiper', mode: 'client' }
+    {src: '~/plugins/touch.js'}
   ],
 
   /*
