@@ -6,11 +6,11 @@
 
     .header Die liebendgern
       br
-      | Flitterwochen Paarbox
-    b-carousel.slides(:autoplay="false" v-model="carousel")
+      | Flitterwochen-Paarbox
+    b-carousel.slides(:autoplay="false" v-model="carousel" :arrow="false" @click="swipe")
       b-carousel-item.slide(v-for="(slide, i) in slides" :key="i")
         img(:src="require(`~/assets/${slide.image}`)")
-        .texte(:class="{'has-text-centered': slide.price}" v-touch:swipe="swipe")
+        .texte(:class="{'has-text-centered': slide.price}" v-touch:swipe="swipe" @click="swipe")
           img.swiper(src="~/assets/liebendgern-paarbox-swipe.png")
           .price(v-if="slide.price") {{slide.price}}
           .text1 {{slide.text1}}
@@ -32,18 +32,18 @@ $carousel-indicator-color: #3F8694
 main.section
   padding: 1em 9%
   display: flex
-  justify-content: center
+  justify-content: flex-start
   align-items: center
   flex-direction: column
   height: 100vh
+  padding-top: 0.5em
 
 .geschenk
   margin: 0 auto
-  width: 15%
-  margin-bottom: 1em
+  width: 40px
 
-.headline
-  margin-bottom: 1em
+.headline, .geschenk, .slides
+  margin-bottom: 0.5em
 
 .header
   background: #3F8694
@@ -53,29 +53,29 @@ main.section
   width: 100%
   padding: 0.5em
   line-height: 18px
+  font-weight: 400
 
 .swiper
   float: right
   width: 30px
 
 .slides
-  margin-bottom: 1em
   width: 100%
-  height: 70vh
+  height: 60vh
 .slide
   background: white
 
 .text1, .text2
   hyphens: auto
   line-height: 18px
-  white-space: break-spaces
+  white-space: pre-line
 
 .text2
   font-weight: 300
   margin-top: 1em
 
 .price
-  margin-top: 16px
+  line-height: normal
   font-size: 30px
   font-weight: 700
 
@@ -101,6 +101,7 @@ main.section
   color: white
   display: block
   width: 100%
+  font-weight: 400
 
 form
   width: 100%
@@ -111,9 +112,11 @@ form
 export default {
   methods: {
     swipe (direction) {
-        console.log(direction)  // May be left / right / top / bottom
-        if (direction === 'left') {this.carousel += 1}
-        if (direction === 'right') {this.carousel -= 1}
+      if (this.swiping) {return}
+      if (direction && direction === 'right') {this.carousel -= 1}
+      else if (!direction || (direction && direction === 'left')) {this.carousel += 1}
+      this.swiping = true
+      setTimeout(()=>{this.swiping = false}, 100)
     },
     next () {
       console.log(this.carousel)
@@ -123,6 +126,7 @@ export default {
   data(){
     return {
       carousel: 0,
+      swiping: false,
       slides: [
         {
           image: 'liebendgern-hochzeit-philipp.png',
@@ -153,7 +157,7 @@ export default {
           image: 'liebendgern-paarbox-geoeffnet.png',
           price: '42 €',
           text1: 'inkl. MwSt.\nversandkostenfrei innerhalb\n Deutschlands',
-          text2: 'Lieferzeit ca. 3-4 Werktage',
+          text2: 'Lieferzeit ca. 4-5 Werktage',
         }
       ]
     }

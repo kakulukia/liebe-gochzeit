@@ -27,7 +27,7 @@ $carousel-indicator-color: #707070
 @import "~buefy/src/scss/buefy"
 
 body
-  background: #aaa
+  background: white
   height: 100vh
   display: flex
   align-items: center
