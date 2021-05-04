@@ -78,6 +78,9 @@ main.section
   white-space: pre-line
   font-weight: 500
 
+.text1
+  color: #606060
+
 .text2
   font-weight: 300
   margin-top: 1em
@@ -111,6 +114,9 @@ button.order
   font-weight: 500
   line-height: 36px
   cursor: pointer
+  &:hover
+    background: $orange
+    color: white
 
 form
   width: 100%
@@ -172,7 +178,7 @@ export default {
         {
           image: 'liebendgern-paarbox-karte-geoeffnet.png',
           text1: 'Ein guter Preis für ein hochwertiges Produkt.',
-          text2: '42 Euro, weil 42 die Antwort auf alles ist ;-). Damit kostet eine Karte weniger als ein Cappuccino und das ganze Set ungefähr soviel wie ein „kompletter“ Kinobesuch für Zwei.',
+          text2: '42 Euro, weil 42 die Antwort auf alles ist. ;-)\n Damit kostet eine Karte weniger als ein Cappuccino und das ganze Set ungefähr soviel wie ein „kompletter“ Kinobesuch für Zwei.',
         },
         {
           image: 'liebendgern-paarbox-geoeffnet.png',
