@@ -1,41 +1,46 @@
 <template lang="pug">
-  main.section(v-touch:swipe="swipe")
+  div
+    main.section(v-touch:swipe="swipe")
 
-    img.geschenk(src="~/assets/liebendgern-hochzeit-geschenk.png")
-    img.headline(src="~/assets/liebendgern-hochzeitsgeschenk-typo.png")
+      img.geschenk(src="~/assets/liebendgern-hochzeit-geschenk.png")
+      img.headline(src="~/assets/liebendgern-hochzeitsgeschenk-typo.png")
 
-    .header Die liebendgern
-      br
-      | Flitterwochen-Paarbox
-    b-carousel.slides(:autoplay="false" v-model="carousel" :arrow="false" @click="swipe")
-      b-carousel-item.slide(v-for="(slide, i) in slides" :key="i")
-        img(:src="require(`~/assets/${slide.image}`)")
-        .texte(:class="{'has-text-centered': slide.price}" v-touch:swipe="swipe" @click="swipe")
-          img.swiper(src="~/assets/liebendgern-paarbox-swipe.png")
-          .price(v-if="slide.price") {{slide.price}}
-          .text1 {{slide.text1}}
-          .text2 {{slide.text2}}
-
-    form(action="https://www.liebendgern.de/cart/add" method="post" enctype="multipart/form-data")
-      input(type="hidden" name="id" value="1837669")
-      input(type="hidden" id="quantity" name="quantity" value="1")
-      button.order(
-        type="submit" name="add") Bestelle direkt
+      .header Die liebendgern
         br
-        | die liebendgern PAARBOX
+        | Flitterwochen-Paarbox
+      b-carousel.slides(:autoplay="false" v-model="carousel" :arrow="false" @click="swipe")
+        b-carousel-item.slide(v-for="(slide, i) in slides" :key="i")
+          img(:src="require(`~/assets/${slide.image}`)")
+          .texte(:class="{'has-text-centered': slide.price}" v-touch:swipe="swipe" @click="swipe")
+            img.swiper(src="~/assets/liebendgern-paarbox-swipe.png" @click="swipe")
+            .price(v-if="slide.price") {{slide.price}}
+            .text1 {{slide.text1}}
+            .text2 {{slide.text2}}
+
+      form(action="https://www.liebendgern.de/cart/add" method="post" enctype="multipart/form-data")
+        input(type="hidden" name="id" value="1837669")
+        input(type="hidden" id="quantity" name="quantity" value="1")
+        button.order(
+          type="submit" name="add") IN DEN WARENKORB
+
+    .logo-container
+      a(href="https://www.liebendgern.de")
+        img.logo(src="~/assets/liebendgern-logo.png")
 </template>
 
 <style lang="sass">
 
 $carousel-indicator-color: #3F8694
+$petrol: #008896
+$orange: #FF6B39
 
 main.section
-  padding: 1em 9%
+  padding: 1em 7% 3rem
   display: flex
   justify-content: flex-start
   align-items: center
   flex-direction: column
-  height: 100vh
+  min-height: calc(100vh - 62px)
   padding-top: 0.5em
 
 .geschenk
@@ -46,7 +51,7 @@ main.section
   margin-bottom: 0.5em
 
 .header
-  background: #3F8694
+  background: $petrol
   color: white
   text-transform: uppercase
   text-align: center
@@ -61,7 +66,9 @@ main.section
 
 .slides
   width: 100%
+  min-height: 390px
   height: 60vh
+  max-height: 430px
 .slide
   background: white
 
@@ -69,6 +76,7 @@ main.section
   hyphens: auto
   line-height: 18px
   white-space: pre-line
+  font-weight: 500
 
 .text2
   font-weight: 300
@@ -93,26 +101,39 @@ main.section
     .text2
       font-weight: 500
 
-.order
-  background: #EC744E
-  border-radius: 10px
+button.order
+  border: 2px solid $orange
+  background: white
+  color: $orange
   padding: 0.5em
-  border: none
-  color: white
   display: block
   width: 100%
-  font-weight: 400
+  font-weight: 500
+  line-height: 36px
+  cursor: pointer
 
 form
   width: 100%
 
-</style>zt75tfg
+.logo-container
+  background: #f5f5f5
+  display: flex
+  justify-content: center
+  padding: 20px 0 10px
+  a
+    text-align: center
+.logo
+  width: 100px
+
+
+</style>
 
 <script>
 export default {
   methods: {
     swipe (direction) {
       if (this.swiping) {return}
+      if (typeof direction === 'object') {direction = undefined}
       if (direction && direction === 'right') {this.carousel -= 1}
       else if (!direction || (direction && direction === 'left')) {this.carousel += 1}
       this.swiping = true
@@ -135,12 +156,12 @@ export default {
         },
         {
           image: 'liebendgern-paarbox-hochzeit-ringe.png',
-          text1: 'Verschenke schöne Momente die dem Hochzeitspaar noch mehr Nähe bringen.',
+          text1: 'Verschenke schöne Momente, die dem Hochzeitspaar noch mehr Nähe bringen.',
           text2: 'Die liebendgern PAARBOX beinhaltet 18 einzigartig und liebevoll gestaltete Inspirationskarten.',
         },
         {
           image: 'liebendgern-paarbox-kartenset.png',
-          text1: 'Der Clou? Das Hochzeitspaar weiß nicht welches gemeinsame Abenteuer auf Sie wartet.',
+          text1: 'Der Clou? Das Hochzeitspaar weiß nicht, welches gemeinsame Abenteuer auf sie wartet.',
           text2: 'Jede Karte ist zunächst verschlossen. Gemeinsam wird eine Karte ausgesucht, geöffnet und gespielt.',
         },
         {
